@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIH Smart Label Checker</title>
+  
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Tesseract OCR Library -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+  <h2>SIH Smart Label Checker</h2>
+  <p class="sub">Packaged Commodity Compliance Detector</p>
+
+  <div class="card">
+    <!-- Choice Buttons -->
+    <div class="action-buttons">
+      <button class="btn" onclick="startCamera()">📷 Live Camera</button>
+      <label for="cameraInput" class="btn btn-secondary">📁 Upload Image</label>
+      <input type="file" id="cameraInput" accept="image/*" onchange="loadImage(event)">
+    </div>
+    
+    <!-- Video Stream Container -->
+    <div class="video-container" id="videoContainer" style="display:none;">
+      <video id="webcam" autoplay playsinline></video>
+      <button class="btn btn-capture" onclick="captureFrame()">📸 Capture & Scan Label</button>
+    </div>
+
+    <!-- Preview Canvas -->
+    <div class="canvas-container">
+      <canvas id="previewCanvas"></canvas>
+    </div>
+    
+    <!-- Rotation Controls -->
+    <div class="controls" id="rotateControls" style="display:none;">
+      <button class="btn btn-secondary" onclick="rotateImage(90)">🔄 Rotate 90°</button>
+      <button class="btn btn-secondary" onclick="rotateImage(180)">🔄 Rotate 180°</button>
+    </div>
+  </div>
+
+  <div id="loader">
+    <div class="spinner"></div>
+    <span>Processing Label Data & Running OCR...</span>
+  </div>
+
+  <div id="resultCard" class="card" style="display:none;">
+    <div id="status"></div>
+    <div style="margin-top: 10px;">
+      <div class="item"><span>Dietary Indicator:</span> <span id="vegStatus" class="badge"></span></div>
+      <div class="item"><span>Ingredients & Allergens:</span> <span id="ingredients" class="badge"></span></div>
+      <div class="item"><span>FSSAI License:</span> <span id="fssai" class="badge"></span></div>
+      <div class="item"><span>MRP (Inclusive Taxes):</span> <span id="mrp" class="badge"></span></div>
+      <div class="item"><span>Net Quantity:</span> <span id="netQty" class="badge"></span></div>
+      <div class="item"><span>Expiry / Date Coding:</span> <span id="expiry" class="badge"></span></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Link -->
+  <script src="script.js"></script>
+</body>
+</html>
